@@ -1,30 +1,47 @@
 /**
  * Main Web Server
  * 
- * Provide access of webscripts through get and post requests.
+ * Provide files to web app through get and post requests.
  * Interface to data structures is also provided through get and pull requests.
  */
 
 const bodyParser = require("body-parser");
 const express = require('express');
-const app = express();
+const serv = express();
 
 //Config express to use body-parser as middle-ware
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json());
+serv.use(bodyParser.urlencoded({extended: false}));
+serv.use(bodyParser.json());
+
+
+
+///                   ///
+///   FILE TRANSFER   ///
+///                   ///
 
 //Default no url extension
-app.get('/', (req, res) => {
+serv.get('/', (req, res) => {
     res.sendFile(__dirname + '/Home_Page.html');
 });
 
 //Admin url extension
-app.get('/admin', (req, res) => {
+serv.get('/admin', (req, res) => {
     res.sendFile(__dirname + '/Admin_Page.html');
 });
 
-app.get('/Browser_Script.js', (res, req) => {
+//Main website script
+serv.get('/Browser_Script.js', (req, res) => {
     res.sendFile(__dirname + '/Browser_Script.js');
 });
+
+
+///                   ///
+///   STRUCT ACCESS   ///
+///                   ///
+
+//TODO
+
+
+///   INIT   ///
 
 app.listen(8080, () => console.log('listening on port 8080'));

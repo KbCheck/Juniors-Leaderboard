@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/jackelpobelope/Juniors-Leaderboard#readme",
   "dependencies": {
+    "express": "^4.17.1",
     "node": "^15.4.0"
   }
 }

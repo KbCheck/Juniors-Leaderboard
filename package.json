@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/jackelpobelope/Juniors-Leaderboard/issues"
   },
-  "homepage": "https://github.com/jackelpobelope/Juniors-Leaderboard#readme"
+  "homepage": "https://github.com/jackelpobelope/Juniors-Leaderboard#readme",
+  "dependencies": {
+    "node": "^15.4.0"
+  }
 }

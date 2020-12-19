@@ -2,7 +2,9 @@
  * Main Web Server
  * 
  * Provide files to web app through get and post requests.
+ * Construction, storage of data structures. 
  * Interface to data structures is also provided through get and pull requests.
+ * 
  */
 
 const bodyParser = require("body-parser");
@@ -13,6 +15,13 @@ const serv = express();
 serv.use(bodyParser.urlencoded({extended: false}));
 serv.use(bodyParser.json());
 
+
+
+///                      ///
+///   DATA CONSTRUCTOR   ///
+///                      ///
+
+//TODO
 
 
 ///                   ///

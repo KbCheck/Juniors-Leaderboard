@@ -7,6 +7,8 @@
  * 
  */
 
+const jQuery = require('jQuery');
+const papa = require('papaparse');
 const bodyParser = require("body-parser");
 const express = require('express');
 const serv = express();

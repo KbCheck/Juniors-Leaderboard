@@ -5,17 +5,61 @@
 const Papa = require('papaparse');
 const fs = require('fs');
 
+
+
 /**
- * Results :: Class
- * define a structure for storing the results of recent hockey games.
- * Results can be incomplete, and updated as time passes.
- *  
+ * User :: Class
+ * Define a user who has placed bets on hockey games. 
+ * Store all bets for each game and some personal information on the user.
  */
-class Results {
-    
-    constructor(key, results) {
+class User {
+
+    constructor(name, email, pNumber, donation, bets) {
+        this.name = name; //String name of user
+        this.email = email; //String email address of user
+        this.pNumber = pNumber; //String phone number
+        this.donation = donation; //String donation amount
+        this.bets = bets; //String[] 
+        this.score = 0;
+    }
+
+    getName(){
+        return this.name;
+    }
+
+    getBets(){
+        return this.bets;
+    }
+
+    getGame(index){
+        return this.bets[index];
+    }
+
+    addScore(amount){
+        this.score += amount;
+    }
+
+    getScore(){
+        return amount;
+    }
+}
+
+
+
+
+
+/**
+ * The top dog data structure.
+ * This houses all the information needed for the leaderboard.
+ * Users are scored on leaderboard construction
+ */
+class Leaderboard {
+
+    constructor(users, key, results){
+
         this.key = key;
         this.results = results;
+        this.users = scoreUsers(constructUsers(users));
     }
 
     updateResults(results) {
@@ -37,74 +81,65 @@ class Results {
 }
 
 
+function scoreUsers(){
+    //TODO
+}
 
 
-
-
-/**
- * User :: Class
- * Define a user who has placed bets on hockey games. 
- * Store all bets for each game and some personal information on the user.
- */
-class User {
-
-    constructor(name, email, pNumber, donation, bets) {
-        this.name = name; //String name of user
-        this.email = email; //String email address of user
-        this.pNumber = pNumber; //String phone number
-        this.donation = donation; //String donation amount
-        this.bets = bets; //String[] 
-    }
-
-    getBets(){
-        return this.bets;
-    }
-
-    getGame(index){
-        return this.bets[index];
-    }
+function constructUsers(){
+    //TODO
 }
 
 
 
+//merge sort for the leaderboard
+// users : takes array of class User
+function mergeSort(users){
 
+    var len = users.length; //array length
 
-class Leaderboard {
-    constructor(){
-
-    } 
-
-}
- 
-/** NOT SURE IF NECESSARY
-class Bets{
-
-    constructor(){
-        this.betRay;
+    if (len <= 1){ //if divided then return array
+        return users; 
     }
 
+    var mid = Math.floor(len/2); //middle index of array
+    var left = users.slice(0, mid); //first half of array 
+    var right = users.slice(mid, len); //last half of array
+
+    return merge(mergeSort(left), mergeSort(right)); //recursively sort pieces in helper function
+
 }
-*/
+//helper function, merges divided array
+function merge(left, right){
+
+    var result = []; //hold results of merge
+    
+}
+
+
+
 
 if (require.main === module) {
+
+    var resultsCSV = 'results.csv';
+    var betsCSV = 'bets.csv';
     
+    var file = fs.readFileSync(resultsCSV, 'utf8');
+    var resultsParse = Papa.parse(file)['data'];
+    var key = resultsParse[0];
+    var results = resultsParse[1];
 
-    fs.readFile('results.csv', 'utf8', (err, data) => {
-        if (err){
-            return console.log(err);
-        }
-        var file = data;
-        
-        var ray = Papa.parse(file)['data'];
+    file = fs.readFileSync(betsCSV, 'utf8');
+    var betsParse = Papa.parse(file)['data'];
 
 
-        //TESTING
-        //console.log(ray);
+    var users = betsParse.slice(1, betsParse.length);
+    
+    var board = new Leaderboard(users, key, results);
 
-        var results = new Results(ray[0], ray[1]);
-
-        console.log(results.getReportedCount()); //get number of game results reported
-    });
+    console.log(users);
+    console.log(key);
+    console.log(results);
 
  
 }

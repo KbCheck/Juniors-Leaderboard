@@ -7,12 +7,23 @@
  * 
  */
 
+///   Variables   ///
+
+var resultsCSV = 'results.csv';
+var betsCSV = 'bets.csv'; 
+
+
+ //Include external libraries
+const structs = require('Structs');
 const jQuery = require('jQuery');
 const papa = require('papaparse');
 const bodyParser = require("body-parser");
 const express = require('express');
-const serv = express();
 
+
+
+
+const serv = express(); //hand requests using Express serv
 //Config express to use body-parser as middle-ware
 serv.use(bodyParser.urlencoded({extended: false}));
 serv.use(bodyParser.json());

@@ -1,10 +1,9 @@
 /**
  *  Define the data structures for the project
- */
+*/
 
-
-
-
+const Papa = require('papaparse');
+const fs = require('fs');
 
 /**
  * Results :: Class
@@ -14,24 +13,28 @@
  */
 class Results {
     
-    constructor() {
-        this.gameOne;
-        this.gameTwo;
-
-        this.Games = [];
-
+    constructor(key, results) {
+        this.key = key;
+        this.results = results;
     }
 
-    updateResults() {
-        
-
+    updateResults(results) {
+        this.results = results;
     }
 
     getResults(){
-
+        return this.results;
     }
 
- }
+    getReportedCount(){
+        return this.results.length;
+    }
+
+    getKey(){
+        return this.key;
+    }
+
+}
 
 
 
@@ -82,3 +85,27 @@ class Bets{
 
 }
 */
+
+if (require.main === module) {
+    
+
+    fs.readFile('results.csv', 'utf8', (err, data) => {
+        if (err){
+            return console.log(err);
+        }
+        var file = data;
+        
+        var ray = Papa.parse(file)['data'];
+
+
+        //TESTING
+        //console.log(ray);
+
+        var results = new Results(ray[0], ray[1]);
+
+        console.log(results.getReportedCount()); //get number of game results reported
+    });
+
+ 
+}
+

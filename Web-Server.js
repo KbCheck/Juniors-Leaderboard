@@ -13,12 +13,14 @@ var resultsCSV = 'results.csv';
 var betsCSV = 'bets.csv'; 
 
 
- //Include external libraries
-const structs = require('Structs');
+//Include external libraries
+const structs = require('./Structs');
 const jQuery = require('jQuery');
 const papa = require('papaparse');
 const bodyParser = require("body-parser");
 const express = require('express');
+
+
 
 
 
@@ -54,6 +56,11 @@ serv.get('/admin', (req, res) => {
 //Main website script
 serv.get('/Browser_Script.js', (req, res) => {
     res.sendFile(__dirname + '/Browser_Script.js');
+});
+
+//Sends structs to web script
+serv.get('/Structs.js', (req, res) => {
+    res.sendFile(__dirname + '/Structs.js');
 });
 
 

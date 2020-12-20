@@ -6,7 +6,6 @@ const Papa = require('papaparse');
 const fs = require('fs');
 
 
-
 /**
  * User :: Class
  * Define a user who has placed bets on hockey games. 
@@ -15,7 +14,8 @@ const fs = require('fs');
 class User {
 
     constructor(name, email, pNumber, donation, bets) {
-        this.name = name; //String name of user
+        this.fname = fname; //String first name of user
+        this.lname = lname; //String last name of user
         this.email = email; //String email address of user
         this.pNumber = pNumber; //String phone number
         this.donation = donation; //String donation amount
@@ -23,8 +23,24 @@ class User {
         this.score = 0;
     }
 
-    getName(){
-        return this.name;
+    getFirstName(){
+        return this.fname;
+    }
+
+    getLastName(){
+        return this.lname;
+    }
+
+    getEmail(){
+        return this.email;
+    }
+
+    getPhone(){
+        return this.pNumber;
+    }
+
+    getDonation(){
+        return this.donation;
     }
 
     getBets(){
@@ -35,12 +51,12 @@ class User {
         return this.bets[index];
     }
 
-    addScore(amount){
-        this.score += amount;
+    setScore(amount){
+        this.score = amount;
     }
 
     getScore(){
-        return amount;
+        return this.score;
     }
 }
 
@@ -55,11 +71,17 @@ class User {
  */
 class Leaderboard {
 
-    constructor(users, key, results){
+    /**
+     * users - an array of users exported from user csv
+     * legend - an array of the titles of the matches
+     * results - the answers/results to the games in the corresponding legend
+     */
+    constructor(users, legend, results){
 
-        this.key = key;
+        this.legend = legend;
         this.results = results;
-        this.users = scoreUsers(constructUsers(users));
+        //this.users = this.#constructUsers(users, results);
+        
     }
 
     updateResults(results) {
@@ -74,51 +96,97 @@ class Leaderboard {
         return this.results.length;
     }
 
-    getKey(){
-        return this.key;
+    getLegend(){
+        return this.legend;
     }
 
-}
+    //constructs the users of the leaderboard and sorts them
+    #constructUsers(users){
 
-
-function scoreUsers(){
-    //TODO
-}
-
-
-function constructUsers(){
-    //TODO
-}
-
-
-
-//merge sort for the leaderboard
-// users : takes array of class User
-function mergeSort(users){
-
-    var len = users.length; //array length
-
-    if (len <= 1){ //if divided then return array
-        return users; 
-    }
-
-    var mid = Math.floor(len/2); //middle index of array
-    var left = users.slice(0, mid); //first half of array 
-    var right = users.slice(mid, len); //last half of array
-
-    return merge(mergeSort(left), mergeSort(right)); //recursively sort pieces in helper function
-
-}
-//helper function, merges divided array
-function merge(left, right){
-
-    var result = []; //hold results of merge
+        var result = []
+            len = users.length;
+            userLen = users[0].length;
     
+        for (var i = 0; i < length; i++) {
+           
+            var fname = users[i][1];
+                lname = users[i][2];
+                email = users[i][3];
+                pnumber = users[i][4];
+                bets = users[i].slice(5,userLen-1);
+                donation = users[i][userLen-1];
+                user = new User(fname,lname,email,pnumber,bets,donation);
+            user.setScore(this.#scoreUser(user));
+            results.push(user);
+        }
+    
+    }
+
+    //scores a user, returns an int
+    #scoreUser(user){
+        var bets = user.getBets();
+            tally = 0;
+            
+        for (var i = 0; i<= this.results.length; i++) {
+            if (this.results[i] == bets[i]){
+                switch(i){
+                    case 20:
+                        tally += 2;
+                    case 21:
+                        tally += 3;
+                    case 22:
+                        tally += 4;
+                    default:
+                        tally += 1;
+                }
+            }
+        }
+        return tally;
+    }
+
+
+    //merge sort for the leaderboard
+    // users : takes array of class User
+    #mergeSort(users){
+
+        var len = users.length; //array length
+
+        if (len <= 1){ //if divided then return array
+            return users; 
+        }
+
+        var mid = Math.floor(len/2); //middle index of array
+        var left = users.slice(0, mid); //first half of array 
+        var right = users.slice(mid, len); //last half of array
+
+        return merge(mergeSort(left), mergeSort(right)); //recursively sort pieces in helper function
+
+    }
+    //helper method, merges divided array
+    #merge(left, right){
+
+        var result = [];
+
+        //TODO
+        
+        
+    }
+
+}
+
+
+
+//exports of classes
+module.exports = {
+    Leaderboard: Leaderboard,
+    User: User
 }
 
 
 
 
+
+//MAIN TESTING
 if (require.main === module) {
 
     var resultsCSV = 'results.csv';
@@ -126,7 +194,7 @@ if (require.main === module) {
     
     var file = fs.readFileSync(resultsCSV, 'utf8');
     var resultsParse = Papa.parse(file)['data'];
-    var key = resultsParse[0];
+    var legend = resultsParse[0];
     var results = resultsParse[1];
 
     file = fs.readFileSync(betsCSV, 'utf8');
@@ -135,10 +203,9 @@ if (require.main === module) {
 
     var users = betsParse.slice(1, betsParse.length);
     
-    var board = new Leaderboard(users, key, results);
-
+    var board = new Leaderboard(users, legend, results);
     console.log(users);
-    console.log(key);
+    console.log(legend);
     console.log(results);
 
  

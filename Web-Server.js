@@ -63,6 +63,11 @@ serv.get('/Structs.js', (req, res) => {
     res.sendFile(__dirname + '/Structs.js');
 });
 
+//Sends home page css styles
+serv.get('/Home_Page_Styles.css', (req, res) => {
+    res.sendFile(__dirname + '/Home_Page_Styles.css');
+});
+
 
 ///                   ///
 ///   STRUCT ACCESS   ///

@@ -1,0 +1,42 @@
+body {
+    min-height: 450px;
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(to right, #1a1a1f 0%, #636363 50%, #1a1a1f 100%);
+}
+
+.table {
+    margin: 0px auto;
+    float: none;
+    text-align: center;
+}
+
+.table-responsive {
+  border-radius: 25px;
+  max-height: 80%;
+  max-width: fit-content;
+  margin: 0px auto;
+  float: none;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -55%);
+}
+
+.table td {
+  text-align: center;
+}
+
+.scrollhide {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+.scrollHide::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
+
+.tableWidth {
+    width: 40vw;
+}
+

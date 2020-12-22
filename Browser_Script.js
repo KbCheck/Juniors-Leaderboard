@@ -1,15 +1,26 @@
 var dynamicScoreID = 0;
 
 window.onload = function() {
-    var rowData=new Array(); 
-    rowData[0]="Yay";
-    rowData[1]="test";
-    rowData[2]="98";
+    xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("GET","http://localhost:8080/getData", true);
+    xmlhttp.onreadystatechange=function() {
 
-    rowData.forEach(function (item) {
-        addRowScoreboard(item, item, item);
-    });
+     if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+            var dataArr = createArrayFromString(xmlhttp.responseText);
+            console.log(dataArr);
+            dataArr.forEach(function (item) {
+                addRowScoreboard(item[0], item[1], item[2]);
+            });
+         } 
+    }
+    xmlhttp.send();
 };
+
+function createArrayFromString(data) {
+    var formattedData = JSON.parse("[" + data + "]");
+    
+    return formattedData[0];
+}
 
 function addRowScoreboard(fName, lName, score) {
     dynamicScoreID++;

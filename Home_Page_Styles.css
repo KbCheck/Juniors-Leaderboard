@@ -9,8 +9,17 @@ body {
     margin: 0px auto;
     float: none;
     text-align: center;
+    border-radius: 25px;
 }
 
+/* .table tr:first-child th:first-child {
+    border-top-left-radius: 25px;
+}
+
+.table tr:first-child th:last-child {
+    border-top-right-radius: 25px;
+} */
+  
 .table-responsive {
   border-radius: 25px;
   max-height: 80%;
@@ -40,3 +49,7 @@ body {
     width: 40vw;
 }
 
+h1 {
+    text-align: center;
+    /*font-size: min(5vw, 8vh);*/
+}

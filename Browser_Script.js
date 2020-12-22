@@ -1,5 +1,3 @@
-//const structs = require('./Structs');
-
 var dynamicScoreID = 0;
 
 window.onload = function() {

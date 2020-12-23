@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 
+<!-- Include all of the required scripts and set the title here -->
 <head>
     <title>Junior's Fantasy Leaderboard</title>
     <meta charset="utf-8">
@@ -12,23 +13,23 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 
+<!-- Set up the responsive table in the body -->
 <body>
-  <!-- <h1>Junior Fantasy Leaderboard</h1> -->
-
   <div class="table-responsive scrollHide">
     <table class="table table-striped table-light tableWidth">
-        <thead class="thead-dark"> 
-          <tr>
-            <th style="width:10%" scope="col">#</th>
-            <th style="width:30%" scope="col">First Name</th>
-            <th style="width:30%" scope="col">Last Name</th>
-            <th style="width:30%" scope="col">Score</th>
-          </tr>
-        </thead>
-        <tbody class="table" id="tableEntries">
-            <!-- This is dynamically filled -->
-        </tbody>
-      </table>
-    </div>
+      <thead class="thead-dark"> 
+        <tr>
+          <!-- Set column names in the table -->
+          <th style="width:10%" scope="col">#</th>
+          <th style="width:30%" scope="col">First Name</th>
+          <th style="width:30%" scope="col">Last Name</th>
+          <th style="width:30%" scope="col">Score</th>
+        </tr>
+      </thead>
+      <tbody class="table" id="tableEntries">
+          <!-- This is dynamically filled with data from the server -->
+      </tbody>
+    </table>
+  </div>
 </body>
 </html>

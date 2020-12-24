@@ -20,7 +20,8 @@ window.onload = function() {
 
         // Use the formatted data to add each row to the leaderboard dynamically
         dataArr.forEach(function (item) {
-            addRowScoreboard(item[0], item[1], item[2]);
+            var name = item[0].concat(" ", item[1]);
+            addRowScoreboard(name, item[2]);
         });
         } 
     }
@@ -37,11 +38,11 @@ function createArrayFromString(data) {
 
 // This function increments the position # in each row
 // Also adds the dynamic new rows with data sent from the server
-function addRowScoreboard(fName, lName, score) {
+function addRowScoreboard(name, score) {
     dynamicPositionID++;
 
     // Add new row to the table with the given data from the server
     var newRow = document.getElementById('tableEntries');
     newRow.insertAdjacentHTML('beforeend', '<tr><th scope="row">' + dynamicPositionID + '</th><td>'
-     + fName + '</td><td>' + lName + '</td><td>' + score + '</td></tr>');    
+     + name + '</td><td>' + score + '</td></tr>');    
 }

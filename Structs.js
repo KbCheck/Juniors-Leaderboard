@@ -109,16 +109,32 @@ class Leaderboard {
 
         var result = [],
             userLen = users[0].length;
+        
+        //Index of parsed information
+        var fnameIndex = 1,
+            lnameIndex = 2,
+            emailIndex = 3,
+            pnumberIndex = 4,
+            betsIndexStart = 5,
+            betsIndexEnd = userLen-2,
+            donationIndex = userLen-2,
+            teamIndex = userLen-1;
+
     
         for (var i = 0; i < users.length; i++) {
            
-            var fname = users[i][1],
-                lname = users[i][2],
-                email = users[i][3],
-                pnumber = users[i][4],
-                bets = users[i].slice(5,userLen-1),
-                donation = users[i][userLen-1],
-                user = new User(fname, lname, email, pnumber, bets, donation);
+            var fname = users[i][fnameIndex],
+                lname = users[i][lnameIndex],
+                email = users[i][emailIndex],
+                pnumber = users[i][pnumberIndex],
+                bets = users[i].slice(betsIndexStart, betsIndexEnd),
+                donation = users[i][donationIndex];
+
+            if (user[i][teamIndex] != ""){
+                fname = user[i][teamIndex];
+                lname = "";
+            }
+            var user = new User(fname, lname, email, pnumber, bets, donation);
             user.setScore(this.#scoreUser(user));
             result.push(user);
         }
@@ -230,7 +246,6 @@ if (require.main === module) {
     //console.log(legend);
     //console.log(res);
     //console.log(board.getUsers()[0].getBets());
-
  
 }
 

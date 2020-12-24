@@ -15,7 +15,7 @@ var adminPage = "/Admin_Page.html";
 var STRUCTS = "/Structs.js";
 
 var resultsCSV = 'results.csv';
-var betsCSV = 'users.csv'; 
+var betsCSV = 'bets.csv'; 
 
 
 ///   Variables   ///

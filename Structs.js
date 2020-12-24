@@ -130,8 +130,8 @@ class Leaderboard {
                 bets = users[i].slice(betsIndexStart, betsIndexEnd),
                 donation = users[i][donationIndex];
 
-            if (user[i][teamIndex] != ""){
-                fname = user[i][teamIndex];
+            if (users[i][teamIndex] != ""){
+                fname = users[i][teamIndex];
                 lname = "";
             }
             var user = new User(fname, lname, email, pnumber, bets, donation);
@@ -227,7 +227,7 @@ module.exports = {
 if (require.main === module) {
 
     var resultsCSV = 'results.csv';
-    var betsCSV = 'users.csv';
+    var betsCSV = 'bets.csv';
     
     var file = fs.readFileSync(resultsCSV, 'utf8');
     var resultsParse = Papa.parse(file)['data'];
